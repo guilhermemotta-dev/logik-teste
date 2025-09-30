@@ -205,15 +205,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           // Send Google Ads conversion with enhanced conversions (hashed email/phone)
           sendAdsConversion(payload.email, payload.phone);
-
-          // Meta Pixel Lead event with hashed customer information
-          const hashedEmail = await hashSHA256((payload.email || '').trim().toLowerCase());
-          const hashedPhone = await hashSHA256((payload.phone || '').replace(/\D/g, ''));
-          fbq('track', 'Lead', {
-            em: hashedEmail,
-            ph: hashedPhone
-          });
-          // ==== END EVENTS ==== //
         } catch (error) {
           statusEl.textContent = error.message;
           statusEl.className = 'status error';
