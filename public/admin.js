@@ -5,9 +5,7 @@ import {
   buildAuthHeader
 } from './auth.js';
 
-// ADICIONADO: Seletor para o layout principal
 const adminLayout = document.querySelector('.admin-layout');
-
 const leadsTable = document.getElementById('leads-table');
 const leadsTableBody = leadsTable.querySelector('tbody');
 const leadsEmpty = document.getElementById('leads-empty');
@@ -131,7 +129,6 @@ async function authorizedFetch(url, options = {}) {
 
   const response = await fetch(url, finalOptions);
   if (response.status === 401) {
-    // ADICIONADO: Ocultar painel se a autenticação falhar
     adminLayout.style.display = 'none';
     openAuthDialog(true);
     const error = new Error('Credenciais inválidas.');
@@ -217,6 +214,28 @@ function handleError(error) {
   alert(error.message || 'Ocorreu um erro inesperado.');
 }
 
+function formatPhone(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+
+  if (digits.length > 6) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+  }
+  if (digits.length > 2) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  }
+  if (digits.length > 0) {
+    return `(${digits}`;
+  }
+  return '';
+}
+
+function handlePhoneInput(event) {
+    event.target.value = formatPhone(event.target.value);
+}
+
+createForm.elements.phone.addEventListener('input', handlePhoneInput);
+editForm.elements.phone.addEventListener('input', handlePhoneInput);
+
 createForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   statusEl.style.display = 'none';
@@ -246,7 +265,6 @@ createForm.addEventListener('submit', async (event) => {
     createForm.elements.birthDate.max = today;
     showStatus('Lead criado com sucesso!');
 
-    // ==== ANALYTICS & MARKETING EVENTS (Admin creation) ==== //
     async function hashSHA256(value) {
       if (!value) return '';
       const encoder = new TextEncoder();
@@ -288,7 +306,6 @@ createForm.addEventListener('submit', async (event) => {
     const hashedEmail = await hashSHA256((data.email || '').trim().toLowerCase());
     const hashedPhone = await hashSHA256((data.phone || '').replace(/\D/g, ''));
     fbq('track', 'Lead', { em: hashedEmail, ph: hashedPhone });
-    // ==== END EVENTS ==== //
   } catch (error) {
     handleError(error);
   }
@@ -344,7 +361,6 @@ logoutBtn.addEventListener('click', () => {
   resetCredentials();
   cachedLeads = [];
   renderLeads();
-  // ADICIONADO: Ocultar painel ao fazer logout
   adminLayout.style.display = 'none';
   openAuthDialog();
 });
@@ -397,8 +413,7 @@ authForm.addEventListener('submit', async (event) => {
     }
     setCredentials(username, password);
     closeAuthDialog();
-    // ADICIONADO: Exibir painel após login bem-sucedido
-    adminLayout.style.display = 'grid'; // Ou 'block', dependendo do seu CSS
+    adminLayout.style.display = 'grid';
     await fetchLeads(searchInput.value);
   } catch (error) {
     authError.textContent = error.message || 'Falha na autenticação.';
@@ -410,16 +425,12 @@ cancelAuthBtn.addEventListener('click', () => {
   closeAuthDialog();
 });
 
-// ALTERADO: Lógica inicial da página
 if (credentials) {
-  // Exibe o painel e tenta buscar os leads
-  adminLayout.style.display = 'grid'; // Ou 'block'
+  adminLayout.style.display = 'grid';
   fetchLeads().catch(() => {
-    // Se a busca falhar (ex: token expirado), oculta o painel e pede login
     adminLayout.style.display = 'none';
     openAuthDialog(true);
   });
 } else {
-  // Se não houver credenciais, apenas pede login
   openAuthDialog();
 }
