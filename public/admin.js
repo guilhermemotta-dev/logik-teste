@@ -5,6 +5,9 @@ import {
   buildAuthHeader
 } from './auth.js';
 
+// ADICIONADO: Seletor para o layout principal
+const adminLayout = document.querySelector('.admin-layout');
+
 const leadsTable = document.getElementById('leads-table');
 const leadsTableBody = leadsTable.querySelector('tbody');
 const leadsEmpty = document.getElementById('leads-empty');
@@ -128,6 +131,8 @@ async function authorizedFetch(url, options = {}) {
 
   const response = await fetch(url, finalOptions);
   if (response.status === 401) {
+    // ADICIONADO: Ocultar painel se a autenticação falhar
+    adminLayout.style.display = 'none';
     openAuthDialog(true);
     const error = new Error('Credenciais inválidas.');
     error.authRequired = true;
@@ -242,7 +247,6 @@ createForm.addEventListener('submit', async (event) => {
     showStatus('Lead criado com sucesso!');
 
     // ==== ANALYTICS & MARKETING EVENTS (Admin creation) ==== //
-    // Hashing helper for enhanced conversions and advanced matching
     async function hashSHA256(value) {
       if (!value) return '';
       const encoder = new TextEncoder();
@@ -264,7 +268,6 @@ createForm.addEventListener('submit', async (event) => {
         }
       });
     }
-    // Push generate_lead event to dataLayer
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'generate_lead',
@@ -275,16 +278,13 @@ createForm.addEventListener('submit', async (event) => {
       lead_birthDate: data.birthDate,
       lead_message: data.message
     });
-    // GA4 custom event
     gtag('event', 'generate_lead', {
       lead_name: data.name,
       lead_email: data.email,
       lead_phone: data.phone,
       lead_role: data.role
     });
-    // Google Ads conversion
     sendAdsConversion(data.email, data.phone);
-    // Meta Pixel lead event
     const hashedEmail = await hashSHA256((data.email || '').trim().toLowerCase());
     const hashedPhone = await hashSHA256((data.phone || '').replace(/\D/g, ''));
     fbq('track', 'Lead', { em: hashedEmail, ph: hashedPhone });
@@ -344,6 +344,8 @@ logoutBtn.addEventListener('click', () => {
   resetCredentials();
   cachedLeads = [];
   renderLeads();
+  // ADICIONADO: Ocultar painel ao fazer logout
+  adminLayout.style.display = 'none';
   openAuthDialog();
 });
 
@@ -395,6 +397,8 @@ authForm.addEventListener('submit', async (event) => {
     }
     setCredentials(username, password);
     closeAuthDialog();
+    // ADICIONADO: Exibir painel após login bem-sucedido
+    adminLayout.style.display = 'grid'; // Ou 'block', dependendo do seu CSS
     await fetchLeads(searchInput.value);
   } catch (error) {
     authError.textContent = error.message || 'Falha na autenticação.';
@@ -406,10 +410,16 @@ cancelAuthBtn.addEventListener('click', () => {
   closeAuthDialog();
 });
 
+// ALTERADO: Lógica inicial da página
 if (credentials) {
+  // Exibe o painel e tenta buscar os leads
+  adminLayout.style.display = 'grid'; // Ou 'block'
   fetchLeads().catch(() => {
+    // Se a busca falhar (ex: token expirado), oculta o painel e pede login
+    adminLayout.style.display = 'none';
     openAuthDialog(true);
   });
 } else {
+  // Se não houver credenciais, apenas pede login
   openAuthDialog();
 }
