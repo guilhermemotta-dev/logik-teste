@@ -1,0 +1,16 @@
+{
+  "name": "lead-manager",
+  "version": "2.0.0",
+  "description": "Lead management system ready for Netlify/Vercel deployment with serverless API and admin panel",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required'",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^6.5.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.21.1"
+  }
+}

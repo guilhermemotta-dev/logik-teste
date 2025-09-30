@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Google Tag Manager snippet
+      Load the GTM container early in the <head> to ensure tags
+      configured in GTM fire correctly across all pages.  Replace the
+      container ID with your own if needed.
+    -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P7ZWHDR8');</script>
+    <!-- End Google Tag Manager -->
+    <title>Detalhes do Lead</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <link rel="stylesheet" href="/lead.css" />
+  </head>
+  <body>
+    <!--
+      Google Tag Manager (noscript)
+      Fallback for browsers without JavaScript.  Inserted
+      immediately after the <body> tag as per GTM installation
+      instructions.
+    -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7ZWHDR8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <main class="lead-page">
+      <section class="card lead-card">
+        <header class="lead-header">
+          <div>
+            <a href="/admin.html" class="back-link">&larr; Voltar para o painel</a>
+            <h1 id="lead-name">Lead</h1>
+            <p id="lead-created"></p>
+          </div>
+          <div class="lead-actions">
+            <button id="refresh-lead" class="secondary">Atualizar</button>
+            <button id="logout-btn" class="secondary">Sair</button>
+          </div>
+        </header>
+
+        <div class="lead-content">
+          <div class="lead-section">
+            <h2>Informações principais</h2>
+            <dl>
+              <div>
+                <dt>E-mail</dt>
+                <dd id="lead-email"></dd>
+              </div>
+              <div>
+                <dt>Telefone</dt>
+                <dd id="lead-phone"></dd>
+              </div>
+              <div>
+                <dt>Cargo</dt>
+                <dd id="lead-role"></dd>
+              </div>
+              <div>
+                <dt>Data de nascimento</dt>
+                <dd id="lead-birth"></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="lead-section">
+            <h2>Mensagem</h2>
+            <p id="lead-message" class="lead-message"></p>
+          </div>
+
+          <div class="lead-section">
+            <h2>Tracking (UTMs)</h2>
+            <dl id="lead-tracking" class="tracking-grid"></dl>
+          </div>
+        </div>
+      </section>
+      <div id="lead-status" class="status error" style="display: none"></div>
+    </main>
+
+    <dialog id="auth-dialog" class="auth-dialog">
+      <form id="auth-form">
+        <h3>Acessar painel</h3>
+        <p>Informe o usuário e senha definidos nas variáveis ADMIN_USER e ADMIN_PASS (padrão: admin / admin).</p>
+        <label>
+          Usuário
+          <input type="text" name="username" required />
+        </label>
+        <label>
+          Senha
+          <input type="password" name="password" required />
+        </label>
+        <div id="auth-error" class="status error" style="display: none"></div>
+        <div class="dialog-actions">
+          <button type="button" id="cancel-auth">Cancelar</button>
+          <button type="submit" class="primary">Entrar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/lead.js"></script>
+  </body>
+</html>

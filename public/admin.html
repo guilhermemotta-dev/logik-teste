@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Google Tag Manager snippet
+      This script loads the GTM container at the top of the <head> so
+      that tags fire correctly.  See the GTM quick start guide for
+      further instructions.
+    -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P7ZWHDR8');</script>
+    <!-- End Google Tag Manager -->
+    <title>Painel de Leads</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/admin.css" />
+
+    <!-- Global site tags and pixels (GA4, Google Ads, Meta Pixel).  See
+         index.html for configuration details. Replace placeholder IDs
+         with your own IDs as needed. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXX', { send_page_view: false });
+      gtag('config', 'AW-XXXXXXXX');
+      // Trigger a page_view event for GA4 manually
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+    </script>
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'YOUR_PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
+  </head>
+  <body>
+    <!--
+      Google Tag Manager (noscript)
+      Loads a fallback iframe when JavaScript is disabled so that
+      tracking still occurs.  Must appear immediately after the
+      opening <body> tag.
+    -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7ZWHDR8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="admin-layout">
+      <header class="card">
+        <div class="header-top">
+          <h1>Gestão de Leads</h1>
+          <div class="header-actions">
+            <button id="refresh-btn" class="secondary">Atualizar</button>
+            <button id="logout-btn" class="secondary">Sair</button>
+          </div>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="search" placeholder="Buscar por nome ou e-mail" />
+          <button id="export-btn">Exportar CSV</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>Novo Lead</h2>
+        <form id="admin-create-form" class="form-grid" novalidate>
+          <div class="grid-row">
+            <div>
+              <label for="name">Nome</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div>
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div>
+              <label for="phone">Telefone</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                pattern="^(\\+?55)? ?(\\(?\\d{2}\\)?)[ -]?\\d{4,5}[ -]?\\d{4}$"
+                title="Informe um telefone brasileiro válido"
+                required
+              />
+            </div>
+          </div>
+          <div class="grid-row">
+            <div>
+              <label for="role">Cargo</label>
+              <input type="text" id="role" name="role" required />
+            </div>
+            <div>
+              <label for="birthDate">Data de nascimento</label>
+              <input type="date" id="birthDate" name="birthDate" required />
+            </div>
+          </div>
+          <div>
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="3" required></textarea>
+          </div>
+
+          <div class="grid-row">
+            <div>
+              <label for="utm_source">UTM Source</label>
+              <input type="text" id="utm_source" name="utm_source" />
+            </div>
+            <div>
+              <label for="utm_medium">UTM Medium</label>
+              <input type="text" id="utm_medium" name="utm_medium" />
+            </div>
+            <div>
+              <label for="utm_campaign">UTM Campaign</label>
+              <input type="text" id="utm_campaign" name="utm_campaign" />
+            </div>
+          </div>
+
+          <div class="grid-row">
+            <div>
+              <label for="utm_term">UTM Term</label>
+              <input type="text" id="utm_term" name="utm_term" />
+            </div>
+            <div>
+              <label for="utm_content">UTM Content</label>
+              <input type="text" id="utm_content" name="utm_content" />
+            </div>
+            <div>
+              <label for="gclid">GCLID</label>
+              <input type="text" id="gclid" name="gclid" />
+            </div>
+            <div>
+              <label for="fbclid">FBCLID</label>
+              <input type="text" id="fbclid" name="fbclid" />
+            </div>
+          </div>
+
+          <button type="submit">Salvar lead</button>
+          <div id="admin-status" class="status" style="display: none"></div>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Lista de Leads</h2>
+        <div id="leads-empty">Nenhum lead cadastrado ainda.</div>
+        <div class="table-wrapper">
+          <table id="leads-table" style="display: none">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Criado em</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <template id="lead-row-template">
+      <tr>
+        <td data-field="name"></td>
+        <td data-field="email"></td>
+        <td data-field="phone"></td>
+        <td data-field="createdAt"></td>
+        <td>
+          <div class="actions">
+            <button data-action="view">Detalhes</button>
+            <button data-action="edit">Editar</button>
+            <button data-action="delete">Excluir</button>
+          </div>
+        </td>
+      </tr>
+    </template>
+
+    <dialog id="edit-dialog">
+      <form id="edit-form" class="form-grid">
+        <h3>Editar lead</h3>
+        <input type="hidden" name="id" />
+        <div class="grid-row">
+          <div>
+            <label>Nome</label>
+            <input type="text" name="name" required />
+          </div>
+          <div>
+            <label>E-mail</label>
+            <input type="email" name="email" required />
+          </div>
+          <div>
+            <label>Telefone</label>
+            <input
+              type="tel"
+              name="phone"
+              pattern="^(\\+?55)? ?(\\(?\\d{2}\\)?)[ -]?\\d{4,5}[ -]?\\d{4}$"
+              title="Informe um telefone brasileiro válido"
+              required
+            />
+          </div>
+        </div>
+        <div class="grid-row">
+          <div>
+            <label>Cargo</label>
+            <input type="text" name="role" required />
+          </div>
+          <div>
+            <label>Data de nascimento</label>
+            <input type="date" name="birthDate" required />
+          </div>
+        </div>
+        <div>
+          <label>Mensagem</label>
+          <textarea name="message" rows="3" required></textarea>
+        </div>
+        <div class="grid-row">
+          <div>
+            <label>UTM Source</label>
+            <input type="text" name="utm_source" />
+          </div>
+          <div>
+            <label>UTM Medium</label>
+            <input type="text" name="utm_medium" />
+          </div>
+          <div>
+            <label>UTM Campaign</label>
+            <input type="text" name="utm_campaign" />
+          </div>
+        </div>
+        <div class="grid-row">
+          <div>
+            <label>UTM Term</label>
+            <input type="text" name="utm_term" />
+          </div>
+          <div>
+            <label>UTM Content</label>
+            <input type="text" name="utm_content" />
+          </div>
+          <div>
+            <label>GCLID</label>
+            <input type="text" name="gclid" />
+          </div>
+          <div>
+            <label>FBCLID</label>
+            <input type="text" name="fbclid" />
+          </div>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" id="cancel-edit">Cancelar</button>
+          <button type="submit" class="primary">Salvar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="auth-dialog" class="auth-dialog">
+      <form id="auth-form">
+        <h3>Acessar painel</h3>
+        <p>Informe o usuário e senha definidos nas variáveis ADMIN_USER e ADMIN_PASS (padrão: admin / admin).</p>
+        <label>
+          Usuário
+          <input type="text" name="username" required />
+        </label>
+        <label>
+          Senha
+          <input type="password" name="password" required />
+        </label>
+        <div id="auth-error" class="status error" style="display: none"></div>
+        <div class="dialog-actions">
+          <button type="button" id="cancel-auth">Cancelar</button>
+          <button type="submit" class="primary">Entrar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/admin.js"></script>
+  </body>
+</html>

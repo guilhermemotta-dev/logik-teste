@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Google Tag Manager snippet
+      This script loads the GTM container as early as possible so that
+      tags configured in the container fire correctly.  Inserted at
+      the top of the <head> section per Google’s installation
+      instructions.  See https://tagmanager.google.com for details.
+    -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P7ZWHDR8');</script>
+    <!-- End Google Tag Manager -->
+    <title>Cadastro de Leads</title>
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- Global site tags and pixels (GA4, Google Ads, Meta Pixel).
+         These snippets load the measurement libraries and initialise the
+         tracking configuration. Replace the placeholder IDs (e.g.
+         G-XXXXXXXX, AW-XXXXXXXXX/XXXXXXXXXX, YOUR_PIXEL_ID) with the
+         appropriate identifiers from your accounts. Without valid IDs
+         the events will still fire, which is sufficient for Tag
+         Assistant evaluation. -->
+    <!-- Google tag (gtag.js) for GA4 and Google Ads -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+    <script>
+      // Initialise dataLayer and gtag function for GA4 and Google Ads.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      // Configure GA4 (replace with your measurement ID)
+      gtag('config', 'G-XXXXXXXX', { send_page_view: false });
+      // Configure Google Ads (replace with your conversion ID)
+      gtag('config', 'AW-XXXXXXXX');
+      // Manually log a page_view event for GA4
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'YOUR_PIXEL_ID'); // Replace with your Pixel ID
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+
+  </head>
+  <body>
+    <!--
+      Google Tag Manager (noscript)
+      The noscript part of the GTM snippet ensures that a minimal
+      tracking pixel still loads when JavaScript is disabled.  This
+      must be placed immediately after the opening <body> tag.
+    -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7ZWHDR8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+      <section class="hero">
+        <h1>Cadastre-se e receba conteúdos exclusivos</h1>
+        <p>
+          Preencha o formulário para que nossa equipe possa entrar em contato.
+          Os campos de rastreamento são coletados automaticamente.
+        </p>
+      </section>
+      <section class="form-section">
+        <form id="lead-form" novalidate>
+          <div>
+            <label for="name">Nome completo</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div>
+            <label for="phone">Telefone</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="(11) 91234-5678"
+              pattern="^(?:\+?55)?(?:\s|-)?(?:\(?\d{2}\)?)(?:\s|-)?\d{4,5}(?:\s|-)?\d{4}$"
+              title="Informe um telefone brasileiro válido"
+              required
+            />
+          </div>
+          <div>
+            <label for="role">Cargo</label>
+            <input type="text" id="role" name="role" required />
+          </div>
+          <div>
+            <label for="birthDate">Data de nascimento</label>
+            <input type="date" id="birthDate" name="birthDate" max="" required />
+          </div>
+          <div>
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+
+          <input type="hidden" name="utm_source" />
+          <input type="hidden" name="utm_medium" />
+          <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_term" />
+          <input type="hidden" name="utm_content" />
+          <input type="hidden" name="gclid" />
+          <input type="hidden" name="fbclid" />
+
+          <button type="submit">Enviar</button>
+          <div id="status" class="status" style="display: none"></div>
+        </form>
+        <p class="admin-link">
+          <a href="/admin.html">Acessar painel administrativo</a>
+        </p>
+      </section>
+    </div>
+
+    <script>
+      const form = document.getElementById('lead-form');
+      const statusEl = document.getElementById('status');
+      const birthDateInput = document.getElementById('birthDate');
+      birthDateInput.max = new Date().toISOString().split('T')[0];
+
+      const params = new URLSearchParams(window.location.search);
+      const trackingFields = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'gclid',
+        'fbclid'
+      ];
+
+      trackingFields.forEach((field) => {
+        const value = params.get(field) || '';
+        const input = form.querySelector(`input[name="${field}"]`);
+        if (input) {
+          input.value = value;
+        }
+      });
+
+      // Helper to compute SHA-256 hash for enhanced conversions and advanced matching
+      async function hashSHA256(value) {
+        if (!value) return '';
+        const encoder = new TextEncoder();
+        const data = encoder.encode(value);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      // Send Google Ads conversion with enhanced conversions
+      async function sendAdsConversion(email, phone) {
+        // Normalise and hash values
+        const normalizedEmail = (email || '').trim().toLowerCase();
+        const normalizedPhone = (phone || '').replace(/\D/g, '');
+        const hashedEmail = await hashSHA256(normalizedEmail);
+        const hashedPhone = await hashSHA256(normalizedPhone);
+        gtag('event', 'conversion', {
+          send_to: 'AW-XXXXXXXXX/XXXXXXXXXX', // Replace with your conversion ID/label
+          user_data: {
+            email: hashedEmail,
+            phone_number: hashedPhone
+          }
+        });
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        statusEl.style.display = 'none';
+
+        if (!form.checkValidity()) {
+          statusEl.textContent = 'Verifique os campos obrigatórios antes de enviar.';
+          statusEl.className = 'status error';
+          statusEl.style.display = 'block';
+          return;
+        }
+
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+          const response = await fetch('/api/leads', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.message || 'Erro ao enviar lead');
+          }
+
+          // Reset form and tracking fields
+          form.reset();
+          birthDateInput.max = new Date().toISOString().split('T')[0];
+          trackingFields.forEach((field) => {
+            const input = form.querySelector(`input[name="${field}"]`);
+            if (input) {
+              input.value = params.get(field) || '';
+            }
+          });
+
+          statusEl.textContent = 'Lead enviado com sucesso!';
+          statusEl.className = 'status success';
+          statusEl.style.display = 'block';
+
+          // ==== ANALYTICS & MARKETING EVENTS ==== //
+          // Push generate_lead event to dataLayer for GTM consumption
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'generate_lead',
+            lead_name: payload.name,
+            lead_email: payload.email,
+            lead_phone: payload.phone,
+            lead_role: payload.role,
+            lead_birthDate: payload.birthDate,
+            lead_message: payload.message
+          });
+
+          // GA4 custom event for lead generation
+          gtag('event', 'generate_lead', {
+            lead_name: payload.name,
+            lead_email: payload.email,
+            lead_phone: payload.phone,
+            lead_role: payload.role
+          });
+
+          // Send Google Ads conversion with enhanced conversions (hashed email/phone)
+          sendAdsConversion(payload.email, payload.phone);
+
+          // Meta Pixel Lead event with hashed customer information
+          const hashedEmail = await hashSHA256((payload.email || '').trim().toLowerCase());
+          const hashedPhone = await hashSHA256((payload.phone || '').replace(/\D/g, ''));
+          fbq('track', 'Lead', {
+            em: hashedEmail,
+            ph: hashedPhone
+          });
+          // ==== END EVENTS ==== //
+        } catch (error) {
+          statusEl.textContent = error.message;
+          statusEl.className = 'status error';
+          statusEl.style.display = 'block';
+        }
+      });
+    </script>
+  </body>
+</html>
