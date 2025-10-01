@@ -1,248 +1,216 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Leads</title>
-    <link rel="stylesheet" href="/styles.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Leads</title>
+    <link rel="stylesheet" href="/styles.css" />
 
-   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+   <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-MMF7T94N');</script>
- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PBXT164FXH"></script>
+<!-- End Google Tag Manager -->
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PBXT164FXH"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  gtag('config', 'G-PBXT164FXH');
+  gtag('config', 'G-PBXT164FXH');
 </script>
 
-  </head>
-  <body>
+  </head>
+  <body>
+<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMF7T94N"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <div class="container">
-      <section class="hero">
-        <h1>Cadastre-se e receba conteúdos exclusivos</h1>
-        <p>
-          Preencha o formulário para que nossa equipe possa entrar em contato.
-          Os campos de rastreamento são coletados automaticamente.
-        </p>
-      </section>
-      <section class="form-section">
-        <form id="lead-form" novalidate>
-          <div>
-            <label for="name">Nome completo</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div>
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div>
-            <label for="phone">Telefone</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="(21) 9 9999-9999"
-              pattern="^(\\+?55)? ?(\\(?\\d{2}\\)?)[ -]?9[ -]?\\d{4}[ -]?\\d{4}$"
-              title="Informe um telefone brasileiro válido"
-              required
-              maxlength="16"
-            />
-          </div>
-          <div>
-            <label for="role">Cargo</label>
-            <input type="text" id="role" name="role" required />
-          </div>
-          <div>
-            <label for="birthDate">Data de nascimento</label>
-            <input type="date" id="birthDate" name="birthDate" max="" required />
-          </div>
-          <div>
-            <label for="message">Mensagem</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
+<!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+      <section class="hero">
+        <h1>Cadastre-se e receba conteúdos exclusivos</h1>
+        <p>
+          Preencha o formulário para que nossa equipe possa entrar em contato.
+          Os campos de rastreamento são coletados automaticamente.
+        </p>
+      </section>
+      <section class="form-section">
+        <form id="lead-form" novalidate>
+          <div>
+            <label for="name">Nome completo</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div>
+            <label for="phone">Telefone</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="(11) 91234-5678"
+              pattern="^(?:\+?55)?(?:\s|-)?(?:\(?\d{2}\)?)(?:\s|-)?\d{4,5}(?:\s|-)?\d{4}$"
+              title="Informe um telefone brasileiro válido"
+              required
+            />
+          </div>
+          <div>
+            <label for="role">Cargo</label>
+            <input type="text" id="role" name="role" required />
+          </div>
+          <div>
+            <label for="birthDate">Data de nascimento</label>
+            <input type="date" id="birthDate" name="birthDate" max="" required />
+          </div>
+          <div>
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
 
-          <input type="hidden" name="utm_source" />
-          <input type="hidden" name="utm_medium" />
-          <input type="hidden" name="utm_campaign" />
-          <input type="hidden" name="utm_term" />
-          <input type="hidden" name="utm_content" />
-          <input type="hidden" name="gclid" />
-          <input type="hidden" name="fbclid" />
+          <input type="hidden" name="utm_source" />
+          <input type="hidden" name="utm_medium" />
+          <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_term" />
+          <input type="hidden" name="utm_content" />
+          <input type="hidden" name="gclid" />
+          <input type="hidden" name="fbclid" />
 
-          <button type="submit" id="botao-gtm">Enviar</button>
-          <div id="status" class="status" style="display: none"></div>
-        </form>
-        <p class="admin-link">
-          <a href="/admin.html">Acessar painel administrativo</a>
-        </p>
-      </section>
-    </div>
+          <button type="submit" id="botao-gtm">Enviar</button>
+          <div id="status" class="status" style="display: none"></div>
+        </form>
+        <p class="admin-link">
+          <a href="/admin.html">Acessar painel administrativo</a>
+        </p>
+      </section>
+    </div>
 
-    <script>
-      const form = document.getElementById('lead-form');
-      const statusEl = document.getElementById('status');
-      const birthDateInput = document.getElementById('birthDate');
-      const phoneInput = document.getElementById('phone'); // Pega o campo de telefone
-      birthDateInput.max = new Date().toISOString().split('T')[0];
+    <script>
+      const form = document.getElementById('lead-form');
+      const statusEl = document.getElementById('status');
+      const birthDateInput = document.getElementById('birthDate');
+      birthDateInput.max = new Date().toISOString().split('T')[0];
 
-      // --- INÍCIO DA ALTERAÇÃO ---
+      const params = new URLSearchParams(window.location.search);
+      const trackingFields = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'gclid',
+        'fbclid'
+      ];
 
-      /**
-       * Formata um número de telefone no padrão (XX) 9 XXXX-XXXX
-       * @param {string} value O valor a ser formatado
-       * @returns {string} O valor formatado
-       */
-      function formatPhone(value) {
-        if (!value) return '';
-        // Remove todos os caracteres não numéricos e limita a 11 dígitos
-        const digits = value.replace(/\D/g, '').slice(0, 11);
-
-        // Aplica a máscara progressivamente
-        if (digits.length > 7) {
-          return `(${digits.slice(0, 2)}) ${digits.slice(2, 3)} ${digits.slice(
-            3,
-            7
-          )}-${digits.slice(7)}`;
+      trackingFields.forEach((field) => {
+        const value = params.get(field) || '';
+        const input = form.querySelector(`input[name="${field}"]`);
+        if (input) {
+          input.value = value;
         }
-        if (digits.length > 3) {
-          return `(${digits.slice(0, 2)}) ${digits.slice(2, 3)} ${digits.slice(3)}`;
-        }
-        if (digits.length > 2) {
-          return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
-        }
-        return `(${digits}`;
-      }
-      
-      // Adiciona o listener para formatar o campo enquanto o usuário digita
-      phoneInput.addEventListener('input', (event) => {
-        event.target.value = formatPhone(event.target.value);
       });
 
-      // --- FIM DA ALTERAÇÃO ---
+      // Helper to compute SHA-256 hash for enhanced conversions and advanced matching
+      async function hashSHA256(value) {
+        if (!value) return '';
+        const encoder = new TextEncoder();
+        const data = encoder.encode(value);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+      }
 
-      const params = new URLSearchParams(window.location.search);
-      const trackingFields = [
-        'utm_source',
-        'utm_medium',
-        'utm_campaign',
-        'utm_term',
-        'utm_content',
-        'gclid',
-        'fbclid'
-      ];
+      // Send Google Ads conversion with enhanced conversions
+      async function sendAdsConversion(email, phone) {
+        // Normalise and hash values
+        const normalizedEmail = (email || '').trim().toLowerCase();
+        const normalizedPhone = (phone || '').replace(/\D/g, '');
+        const hashedEmail = await hashSHA256(normalizedEmail);
+        const hashedPhone = await hashSHA256(normalizedPhone);
+        gtag('event', 'conversion', {
+          send_to: 'AW-XXXXXXXXX/XXXXXXXXXX', // Replace with your conversion ID/label
+          user_data: {
+            email: hashedEmail,
+            phone_number: hashedPhone
+          }
+        });
+      }
 
-      trackingFields.forEach((field) => {
-        const value = params.get(field) || '';
-        const input = form.querySelector(`input[name="${field}"]`);
-        if (input) {
-          input.value = value;
-        }
-      });
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        statusEl.style.display = 'none';
 
-      // Helper to compute SHA-256 hash for enhanced conversions and advanced matching
-      async function hashSHA256(value) {
-        if (!value) return '';
-        const encoder = new TextEncoder();
-        const data = encoder.encode(value);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-      }
+        if (!form.checkValidity()) {
+          statusEl.textContent = 'Verifique os campos obrigatórios antes de enviar.';
+          statusEl.className = 'status error';
+          statusEl.style.display = 'block';
+          return;
+        }
 
-      // Send Google Ads conversion with enhanced conversions
-      async function sendAdsConversion(email, phone) {
-        // Normalise and hash values
-        const normalizedEmail = (email || '').trim().toLowerCase();
-        const normalizedPhone = (phone || '').replace(/\D/g, '');
-        const hashedEmail = await hashSHA256(normalizedEmail);
-        const hashedPhone = await hashSHA256(normalizedPhone);
-        gtag('event', 'conversion', {
-          send_to: 'AW-XXXXXXXXX/XXXXXXXXXX', // Replace with your conversion ID/label
-          user_data: {
-            email: hashedEmail,
-            phone_number: hashedPhone
-          }
-        });
-      }
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
 
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        statusEl.style.display = 'none';
+        try {
+          const response = await fetch('/api/leads', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
 
-        if (!form.checkValidity()) {
-          statusEl.textContent = 'Verifique os campos obrigatórios antes de enviar.';
-          statusEl.className = 'status error';
-          statusEl.style.display = 'block';
-          return;
-        }
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.message || 'Erro ao enviar lead');
+          }
 
-        const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
+          // Reset form and tracking fields
+          form.reset();
+          birthDateInput.max = new Date().toISOString().split('T')[0];
+          trackingFields.forEach((field) => {
+            const input = form.querySelector(`input[name="${field}"]`);
+            if (input) {
+              input.value = params.get(field) || '';
+            }
+          });
 
-        try {
-          const response = await fetch('/api/leads', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          });
+          statusEl.textContent = 'Lead enviado com sucesso!';
+          statusEl.className = 'status success';
+          statusEl.style.display = 'block';
 
-          const data = await response.json();
-          if (!response.ok) {
-            throw new Error(data.message || 'Erro ao enviar lead');
-          }
+          // ==== ANALYTICS & MARKETING EVENTS ==== //
+          // Push generate_lead event to dataLayer for GTM consumption
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'generate_lead',
+            lead_name: payload.name,
+            lead_email: payload.email,
+            lead_phone: payload.phone,
+            lead_role: payload.role,
+            lead_birthDate: payload.birthDate,
+            lead_message: payload.message
+          });
 
-          // Reset form and tracking fields
-          form.reset();
-          birthDateInput.max = new Date().toISOString().split('T')[0];
-          trackingFields.forEach((field) => {
-            const input = form.querySelector(`input[name="${field}"]`);
-            if (input) {
-              input.value = params.get(field) || '';
-            }
-          });
+          // GA4 custom event for lead generation
+          gtag('event', 'generate_lead', {
+            lead_name: payload.name,
+            lead_email: payload.email,
+            lead_phone: payload.phone,
+            lead_role: payload.role
+          });
 
-          statusEl.textContent = 'Lead enviado com sucesso!';
-          statusEl.className = 'status success';
-          statusEl.style.display = 'block';
-
-          // ==== ANALYTICS & MARKETING EVENTS ==== //
-          // Push generate_lead event to dataLayer for GTM consumption
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'generate_lead',
-            lead_name: payload.name,
-            lead_email: payload.email,
-            lead_phone: payload.phone,
-            lead_role: payload.role,
-            lead_birthDate: payload.birthDate,
-            lead_message: payload.message
-          });
-
-          // GA4 custom event for lead generation
-          gtag('event', 'generate_lead', {
-            lead_name: payload.name,
-            lead_email: payload.email,
-            lead_phone: payload.phone,
-            lead_role: payload.role
-          });
-
-          // Send Google Ads conversion with enhanced conversions (hashed email/phone)
-          sendAdsConversion(payload.email, payload.phone);
-        } catch (error) {
-          statusEl.textContent = error.message;
-          statusEl.className = 'status error';
-          statusEl.style.display = 'block';
-        }
-      });
-    </script>
-  </body>
+          // Send Google Ads conversion with enhanced conversions (hashed email/phone)
+          sendAdsConversion(payload.email, payload.phone);
+        } catch (error) {
+          statusEl.textContent = error.message;
+          statusEl.className = 'status error';
+          statusEl.style.display = 'block';
+        }
+      });
+    </script>
+  </body>
 </html>
