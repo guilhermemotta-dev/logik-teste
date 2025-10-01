@@ -6,29 +6,41 @@
     <title>Cadastro de Leads</title>
     <link rel="stylesheet" href="/styles.css" />
 
-   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MMF7T94N');</script>
-<!-- End Google Tag Manager -->
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PBXT164FXH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-MMF7T94N');
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-PBXT164FXH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
 
-  gtag('config', 'G-PBXT164FXH');
-</script>
-
+      gtag('config', 'G-PBXT164FXH');
+    </script>
   </head>
   <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMF7T94N"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MMF7T94N"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
     <div class="container">
       <section class="hero">
         <h1>Cadastre-se e receba conteúdos exclusivos</h1>
@@ -53,9 +65,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               type="tel"
               id="phone"
               name="phone"
-              placeholder="(11) 91234-5678"
-              pattern="^(?:\+?55)?(?:\s|-)?(?:\(?\d{2}\)?)(?:\s|-)?\d{4,5}(?:\s|-)?\d{4}$"
-              title="Informe um telefone brasileiro válido"
+              placeholder="(21) 9 9999-9999"
+              pattern="\(\d{2}\) \d \d{4}-\d{4}"
+              title="Informe um telefone no formato (XX) 9 XXXX-XXXX"
               required
             />
           </div>
@@ -94,6 +106,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const statusEl = document.getElementById('status');
       const birthDateInput = document.getElementById('birthDate');
       birthDateInput.max = new Date().toISOString().split('T')[0];
+
+      // ===== INÍCIO DO CÓDIGO DA MÁSCARA DE TELEFONE =====
+      const phoneInput = document.getElementById('phone');
+
+      phoneInput.addEventListener('input', (event) => {
+        let value = event.target.value.replace(/\D/g, '');
+        value = value.substring(0, 11);
+
+        let formattedValue = '';
+        if (value.length > 7) {
+          formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 3)} ${value.slice(3, 7)}-${value.slice(7)}`;
+        } else if (value.length > 3) {
+          formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 3)} ${value.slice(3)}`;
+        } else if (value.length > 2) {
+          formattedValue = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+        } else if (value.length > 0) {
+          formattedValue = `(${value}`;
+        }
+
+        event.target.value = formattedValue;
+      });
+      // ===== FIM DO CÓDIGO DA MÁSCARA DE TELEFONE =====
 
       const params = new URLSearchParams(window.location.search);
       const trackingFields = [
@@ -145,7 +179,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         statusEl.style.display = 'none';
 
         if (!form.checkValidity()) {
-          statusEl.textContent = 'Verifique os campos obrigatórios antes de enviar.';
+          statusEl.textContent =
+            'Verifique os campos obrigatórios antes de enviar.';
           statusEl.className = 'status error';
           statusEl.style.display = 'block';
           return;
